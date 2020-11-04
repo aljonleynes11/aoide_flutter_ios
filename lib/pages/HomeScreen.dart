@@ -748,9 +748,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           child: Column(
                                             children: [
                                               Icon(
-                                                const IconData(59603,
-                                                    fontFamily:
-                                                        'MaterialIcons'),
+                                                Icons.people,
                                                 size: 35,
                                                 color: Colors.deepPurpleAccent,
                                               ),
