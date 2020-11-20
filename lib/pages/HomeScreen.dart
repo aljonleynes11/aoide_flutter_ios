@@ -351,7 +351,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Center(
                           child: Container(
                             width: displayWidth(context) * 0.9,
-                            height: displayHeight(context) * 0.17,
+                            height: displayHeight(context) * 0.2,
                             child: Card(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0),
@@ -437,7 +437,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             padding: const EdgeInsets.only(
                                                 left: 15, right: 1),
                                             child: Icon(
-                                              Icons.supervisor_account_outlined,
+                                              Icons.people,
                                               size: 30,
                                               color: Colors.blue,
                                             ),
@@ -475,7 +475,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),
                                           Container(
                                             child: Icon(
-                                              Icons.stacked_line_chart_rounded,
+                                              Icons.show_chart,
                                               size: 30,
                                               color: Colors.blue,
                                             ),

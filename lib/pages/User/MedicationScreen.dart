@@ -6,9 +6,11 @@ import 'package:Aiode/commons/TopNavBar.dart';
 import 'package:Aiode/helpers/size.dart';
 import 'package:Aiode/commons/MySpacer.dart';
 import 'package:Aiode/commons/BottomNavBar.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:Aiode/helpers/size.dart';
 import 'package:Aiode/commons/MySpacer.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -25,10 +27,19 @@ class MedicationScreen extends StatefulWidget {
 
 String textHeader =
     'Make a list of medications you are taking now. Include the dose, how often you take them, the imprint on each tablet or capsule, and the name of the pharmacy. The imprint can help you identify a drug when you get refills.';
+var frequencyList = [
+  "Once a day",
+  "Twice a day",
+  "Three times a day",
+  "Every 6 hours",
+  "Every other day",
+  "Once in a week",
+];
 double percentage = 0.1;
 var drugNameController = TextEditingController();
 var dosageController = TextEditingController();
 var timeTextFieldController = TextEditingController();
+var frequencyController = TextEditingController();
 
 @override
 class _MedicationScreenState extends State<MedicationScreen> {
@@ -198,6 +209,29 @@ class _MedicationScreenState extends State<MedicationScreen> {
                     dateTimePicker();
                   }),
             ),
+            //frequency
+            MySpacer(height: 0.03),
+            Container(
+              width: displayWidth(context) * 0.49,
+              child: TextField(
+                  controller: frequencyController,
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    fontFamily: 'Open-Sans-Regular',
+                  ),
+                  decoration: InputDecoration(
+                    icon: Icon(
+                      CustomIcons.pill,
+                      size: 0,
+                    ),
+                    labelText: 'Frequency',
+                  ),
+                  onTap: () {
+                    FocusScope.of(context).requestFocus(new FocusNode());
+                    frequencySlider();
+                  }),
+            ),
           ],
         ),
         buttons: [
@@ -230,6 +264,7 @@ class _MedicationScreenState extends State<MedicationScreen> {
                 dosageController.clear();
                 timeTextFieldController.clear();
                 drugNameController.clear();
+                frequencyController.clear();
               });
             },
             child: Text(
@@ -538,6 +573,90 @@ class _MedicationScreenState extends State<MedicationScreen> {
     } catch (e) {
       print(e);
     }
+  }
+
+  frequencySlider() {
+    String frequencyString = "Choose a frequency";
+    Alert(
+        context: context,
+        title: 'Frequency',
+        style: alertStyle,
+        content: Container(
+          width: displayWidth(context) * 0.6,
+          child: DropdownButton(
+            hint: frequencyString == null
+                ? Text(
+                    '  provider',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontFamily: 'Open-Sans-Regular',
+                    ),
+                  )
+                : Text(
+                    '  $frequencyString',
+                    style: TextStyle(
+                        fontSize: 14,
+                        fontFamily: 'Open-Sans-Regular',
+                        color: Colors.black),
+                  ),
+            isExpanded: true,
+            iconSize: 30.0,
+            items: [for (var i in frequencyList) i].map(
+              (val) {
+                return DropdownMenuItem<String>(
+                  value: val,
+                  child: Text(val),
+                );
+              },
+            ).toList(),
+            onChanged: (val) {
+              setState(
+                () {
+                  frequencyString = val;
+                  frequencyController.text = frequencyString;
+                  Navigator.pop(context);
+                },
+              );
+              print(frequencyString);
+            },
+          ),
+        ),
+        // Container(
+        //     width: displayWidth(context) * 0.49,
+        //     height: displayHeight(context) * 0.05,
+        //     child: Center(
+        //         child: new Swiper(
+        //             itemBuilder: (BuildContext context, int index) {
+        //               return new Container(
+        //                   child: Text(
+        //                 frequencyList[index],
+        //                 textAlign: TextAlign.left,
+        //                 style: TextStyle(
+        //                   fontFamily: 'Open-Sans-Regular',
+        //                   color: Colors.black,
+        //                   fontSize: 12,
+        //                 ),
+        //               ));
+        //             },
+        //             itemCount: frequencyList.length,
+        //             autoplay: false,
+        //             viewportFraction: 0.6,
+        //             scale: 1,
+        //             onIndexChanged: (index) {
+        //               frequencyController.text = frequencyList[index];
+        //             }))
+        //             ),
+        buttons: [
+          DialogButton(
+            onPressed: () async {
+              Navigator.pop(context);
+            },
+            child: Text(
+              "Set time",
+              style: TextStyle(color: Colors.white, fontSize: 16),
+            ),
+          )
+        ]).show();
   }
 
 // dateTimePicker(),
