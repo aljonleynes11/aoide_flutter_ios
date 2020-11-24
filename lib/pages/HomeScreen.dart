@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:Aiode/commons/TopNavBar.dart';
 import 'package:flutter/material.dart';
 import 'package:Aiode/helpers/size.dart';
@@ -670,7 +672,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 height: displayHeight(context) * 0.13,
                                 child: InkWell(
                                   onTap: () {
-                                    Navigator.popAndPushNamed(
+                                    Navigator.pushNamed(
                                         context, '/FollowingList');
                                   },
                                   child: Card(
@@ -712,7 +714,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 height: displayHeight(context) * 0.13,
                                 child: InkWell(
                                   onTap: () {
-                                    Navigator.popAndPushNamed(
+                                    Navigator.pushNamed(
                                         context, '/FollowingList');
                                   },
                                   child: Card(

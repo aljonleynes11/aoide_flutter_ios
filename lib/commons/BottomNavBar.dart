@@ -238,12 +238,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           TabItem(icon: CustomIcons.checklist, title: ''),
           TabItem(icon: CustomIcons.pill, title: ''),
           TabItem(icon: Icons.home, title: ''),
-          TabItem(
-              icon: Icon(
-                Icons.people,
-                color: Colors.white,
-              ),
-              title: ''),
+          TabItem(icon: Icons.people, title: ''),
           TabItem(icon: CustomIcons.paste, title: ''),
         ],
         initialActiveIndex: widget.activeIndex ?? 2, //optional, default as 0

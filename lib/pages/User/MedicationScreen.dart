@@ -147,7 +147,7 @@ class _MedicationScreenState extends State<MedicationScreen> {
         content: Column(
           children: <Widget>[
             Container(
-              width: displayWidth(context) * 0.49,
+              width: displayWidth(context) * 0.6,
               child: TextFormField(
                 maxLength: 30,
                 controller: drugNameController,
@@ -169,7 +169,7 @@ class _MedicationScreenState extends State<MedicationScreen> {
               ),
             ),
             Container(
-              width: displayWidth(context) * 0.49,
+              width: displayWidth(context) * 0.6,
               child: TextFormField(
                 maxLength: 4,
                 controller: dosageController,
@@ -189,7 +189,7 @@ class _MedicationScreenState extends State<MedicationScreen> {
               ),
             ),
             Container(
-              width: displayWidth(context) * 0.49,
+              width: displayWidth(context) * 0.6,
               child: TextField(
                   controller: timeTextFieldController,
                   textAlign: TextAlign.start,
@@ -212,7 +212,7 @@ class _MedicationScreenState extends State<MedicationScreen> {
             //frequency
             MySpacer(height: 0.03),
             Container(
-              width: displayWidth(context) * 0.49,
+              width: displayWidth(context) * 0.6,
               child: TextField(
                   controller: frequencyController,
                   textAlign: TextAlign.start,
@@ -622,7 +622,7 @@ class _MedicationScreenState extends State<MedicationScreen> {
           ),
         ),
         // Container(
-        //     width: displayWidth(context) * 0.49,
+        //     width: displayWidth(context) * 0.6,
         //     height: displayHeight(context) * 0.05,
         //     child: Center(
         //         child: new Swiper(
