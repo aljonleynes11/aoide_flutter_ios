@@ -17,6 +17,7 @@ import 'User/BloodPressureScreen.dart';
 import 'User/BloodSugarScreen.dart';
 import 'User/HeartRateScreen.dart';
 import 'User/WeightScreen.dart';
+import 'dart:math' as math;
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -437,7 +438,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             padding: const EdgeInsets.only(
                                                 left: 15, right: 1),
                                             child: Icon(
-                                              Icons.people,
+                                              Icons.supervised_user_circle,
                                               size: 30,
                                               color: Colors.blue,
                                             ),
@@ -670,7 +671,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: InkWell(
                                   onTap: () {
                                     Navigator.popAndPushNamed(
-                                        context, '/checklist');
+                                        context, '/FollowingList');
                                   },
                                   child: Card(
                                       elevation: 2,
@@ -679,13 +680,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                           padding: const EdgeInsets.all(14),
                                           child: Column(
                                             children: [
-                                              Icon(
-                                                CustomIcons.checklist,
-                                                size: 35,
-                                                color: Colors.blue,
+                                              Row(
+                                                children: [
+                                                  Icon(
+                                                    Icons.person_pin_circle,
+                                                    size: 35,
+                                                    color: Colors.blue,
+                                                  ),
+                                                  Icon(
+                                                    Icons.list,
+                                                    size: 35,
+                                                    color: Colors.blue,
+                                                  ),
+                                                ],
                                               ),
                                               AutoSizeText(
-                                                'Checklist',
+                                                'View Followers',
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
                                                   color: Colors.grey,
@@ -703,7 +713,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: InkWell(
                                   onTap: () {
                                     Navigator.popAndPushNamed(
-                                        context, '/medication');
+                                        context, '/FollowingList');
                                   },
                                   child: Card(
                                       elevation: 2,
@@ -713,13 +723,28 @@ class _HomeScreenState extends State<HomeScreen> {
                                               10, 15, 10, 10),
                                           child: Column(
                                             children: [
-                                              Icon(
-                                                CustomIcons.pill,
-                                                size: 35,
-                                                color: Colors.deepOrangeAccent,
+                                              Row(
+                                                children: [
+                                                  Transform(
+                                                      alignment:
+                                                          Alignment.center,
+                                                      transform:
+                                                          Matrix4.rotationY(
+                                                              math.pi),
+                                                      child: Icon(
+                                                        Icons.list,
+                                                        size: 35,
+                                                        color: Colors.redAccent,
+                                                      )),
+                                                  Icon(
+                                                    Icons.person_pin_circle,
+                                                    size: 35,
+                                                    color: Colors.redAccent,
+                                                  ),
+                                                ],
                                               ),
                                               AutoSizeText(
-                                                'Medication',
+                                                'View Following',
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
                                                   color: Colors.grey,
@@ -732,87 +757,87 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ))),
                                 ),
                               ),
-                              Container(
-                                height: displayHeight(context) * 0.13,
-                                child: InkWell(
-                                  onTap: () {
-                                    Navigator.popAndPushNamed(
-                                        context, '/appointment');
-                                  },
-                                  child: Card(
-                                      elevation: 2,
-                                      color: Colors.white,
-                                      child: Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              10, 15, 10, 10),
-                                          child: Column(
-                                            children: [
-                                              Icon(
-                                                Icons.people,
-                                                size: 35,
-                                                color: Colors.deepPurpleAccent,
-                                              ),
-                                              Text(
-                                                'Appointment',
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontFamily:
-                                                      'Open-Sans-Regular',
-                                                  fontSize: 9,
-                                                ),
-                                              ),
-                                            ],
-                                          ))),
-                                ),
-                              ),
-                              Container(
-                                height: displayHeight(context) * 0.13,
-                                child: InkWell(
-                                  onTap: () async {
-                                    SharedPreferences prefs =
-                                        await SharedPreferences.getInstance();
-                                    var categories =
-                                        prefs.getString('categories');
-                                    print(categories);
-                                    var jsonDecoded = jsonDecode(categories);
-                                    // print(jsonDecoded);
-                                    print(jsonDecoded['Added Data']);
-                                    print(jsonDecoded['Edited Data']);
-                                    print(jsonDecoded['Deleted Data']);
-                                    print(jsonDecoded['Change State']);
-                                    print(jsonDecoded['Poked']);
-                                    print(jsonDecoded['Followed']);
-                                    print(jsonDecoded['Unfollowed']);
-                                    Navigator.popAndPushNamed(context, '/logs');
-                                    print('logs');
-                                  },
-                                  child: Card(
-                                      elevation: 2,
-                                      color: Colors.white,
-                                      child: Padding(
-                                          padding: const EdgeInsets.all(15),
-                                          child: Column(
-                                            children: [
-                                              Icon(
-                                                CustomIcons.paste,
-                                                size: 35,
-                                                color: Colors.redAccent,
-                                              ),
-                                              Text(
-                                                'Logs',
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontFamily:
-                                                      'Open-Sans-Regular',
-                                                  fontSize: 9,
-                                                ),
-                                              ),
-                                            ],
-                                          ))),
-                                ),
-                              ),
+                              // Container(
+                              //   height: displayHeight(context) * 0.13,
+                              //   child: InkWell(
+                              //     onTap: () {
+                              //       Navigator.popAndPushNamed(
+                              //           context, '/appointment');
+                              //     },
+                              //     child: Card(
+                              //         elevation: 2,
+                              //         color: Colors.white,
+                              //         child: Padding(
+                              //             padding: const EdgeInsets.fromLTRB(
+                              //                 10, 15, 10, 10),
+                              //             child: Column(
+                              //               children: [
+                              //                 Icon(
+                              //                   Icons.people,
+                              //                   size: 35,
+                              //                   color: Colors.deepPurpleAccent,
+                              //                 ),
+                              //                 Text(
+                              //                   'Appointment',
+                              //                   textAlign: TextAlign.center,
+                              //                   style: TextStyle(
+                              //                     color: Colors.grey,
+                              //                     fontFamily:
+                              //                         'Open-Sans-Regular',
+                              //                     fontSize: 9,
+                              //                   ),
+                              //                 ),
+                              //               ],
+                              //             ))),
+                              //   ),
+                              // ),
+                              // Container(
+                              //   height: displayHeight(context) * 0.13,
+                              //   child: InkWell(
+                              //     onTap: () async {
+                              //       SharedPreferences prefs =
+                              //           await SharedPreferences.getInstance();
+                              //       var categories =
+                              //           prefs.getString('categories');
+                              //       print(categories);
+                              //       var jsonDecoded = jsonDecode(categories);
+                              //       // print(jsonDecoded);
+                              //       print(jsonDecoded['Added Data']);
+                              //       print(jsonDecoded['Edited Data']);
+                              //       print(jsonDecoded['Deleted Data']);
+                              //       print(jsonDecoded['Change State']);
+                              //       print(jsonDecoded['Poked']);
+                              //       print(jsonDecoded['Followed']);
+                              //       print(jsonDecoded['Unfollowed']);
+                              //       Navigator.popAndPushNamed(context, '/logs');
+                              //       print('logs');
+                              //     },
+                              //     child: Card(
+                              //         elevation: 2,
+                              //         color: Colors.white,
+                              //         child: Padding(
+                              //             padding: const EdgeInsets.all(15),
+                              //             child: Column(
+                              //               children: [
+                              //                 Icon(
+                              //                   CustomIcons.paste,
+                              //                   size: 35,
+                              //                   color: Colors.redAccent,
+                              //                 ),
+                              //                 Text(
+                              //                   'Logs',
+                              //                   textAlign: TextAlign.center,
+                              //                   style: TextStyle(
+                              //                     color: Colors.grey,
+                              //                     fontFamily:
+                              //                         'Open-Sans-Regular',
+                              //                     fontSize: 9,
+                              //                   ),
+                              //                 ),
+                              //               ],
+                              //             ))),
+                              //   ),
+                              // ),
                             ],
                           ),
                         ),

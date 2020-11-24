@@ -1,6 +1,7 @@
 import 'package:Aiode/pages/Auth/Register/RegisterScreen.dart';
 import 'package:Aiode/pages/Auth/Register/RegisterScreen5th.dart';
 import 'package:Aiode/pages/Auth/Register/AvatarScreen.dart';
+import 'package:Aiode/pages/Following/FollowingListScreen.dart';
 import 'package:Aiode/pages/HomeScreen.dart';
 import 'package:Aiode/pages/User/AppointmentScreen.dart';
 
@@ -46,6 +47,7 @@ void main() async {
       '/logs': (context) => LogsScreen(),
       '/home': (context) => HomeScreen(),
       '/chooseImage': (context) => AvatarScreen(),
+      '/FollowingList': (context) => FollowingListScreen(),
     },
   ));
 }

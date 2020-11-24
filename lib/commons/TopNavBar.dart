@@ -39,7 +39,7 @@ class _TopNavBarState extends State<TopNavBar> {
   Widget build(BuildContext context) {
     return WillPopScope(
         onWillPop: () {
-          Navigator.popAndPushNamed(context, '/home');
+          Navigator.pop(context);
         },
         child: FutureBuilder(
             future: _notifications,
