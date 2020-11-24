@@ -42,7 +42,7 @@ class _FollowingListScreenState extends State<FollowingListScreen> {
             padding: const EdgeInsets.only(top: 20.0),
             child: Center(
               child: ListView.builder(
-                itemCount: new Random().nextInt(5),
+                itemCount: random(1, 5),
                 itemBuilder: (context, index) {
                   var result = 'asdf';
                   return Container(
@@ -118,6 +118,11 @@ class _FollowingListScreenState extends State<FollowingListScreen> {
           )),
     );
   }
+}
+
+random(min, max) {
+  var rn = new Random();
+  return min + rn.nextInt(max - min);
 }
 
 var avatarList = [
