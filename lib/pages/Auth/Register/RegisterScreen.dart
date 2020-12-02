@@ -667,7 +667,9 @@ class _RegisterScreen3rdState extends State<RegisterScreen3rd> {
       body: SingleChildScrollView(
         reverse: true,
         child: Padding(
-          padding: EdgeInsets.only(bottom: bottom),
+          padding: EdgeInsets.only(
+            bottom: bottom,
+          ),
           child: Container(
             color: Colors.white,
             child: Center(
@@ -676,7 +678,7 @@ class _RegisterScreen3rdState extends State<RegisterScreen3rd> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   MySpacer(
-                    height: 0.12,
+                    height: 0.04,
                   ),
                   Image.asset(
                     'assets/images/misc/logo.png',
@@ -933,7 +935,7 @@ class _RegisterScreen3rdState extends State<RegisterScreen3rd> {
                         ],
                       )),
                   MySpacer(
-                    height: 0.1,
+                    height: 0.05,
                   ),
                   Container(
                       height: displayHeight(context) * 0.075,
