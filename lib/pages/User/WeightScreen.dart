@@ -12,7 +12,6 @@ import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'package:Aiode/commons/CustomIcons.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:fl_animated_linechart/fl_animated_linechart.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';

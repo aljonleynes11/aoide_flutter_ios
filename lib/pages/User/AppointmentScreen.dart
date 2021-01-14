@@ -107,7 +107,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                           backgroundColor: Colors.white24,
                           child: IconButton(
                             icon: Icon(
-                              IconData(59603, fontFamily: 'MaterialIcons'),
+                             Icons.people,
                               size: 25,
                               color: Colors.white,
                             ),
@@ -191,7 +191,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                 ),
                 decoration: InputDecoration(
                   icon: Icon(
-                    IconData(59603, fontFamily: 'MaterialIcons'),
+                   Icons.people,
                     size: 0,
                   ),
                   labelText: 'Provider',

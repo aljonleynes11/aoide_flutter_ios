@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:Aiode/helpers/size.dart';
 import 'package:Aiode/commons/MySpacer.dart';
 import 'package:Aiode/commons/CustomCard.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:intl/intl.dart';
 import 'package:Aiode/commons/CustomIcons.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -15,6 +16,8 @@ import 'dart:convert';
 import 'dart:async';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../model/User.dart';
+import 'Notification/NotificationScreen.dart';
 import 'User/BloodPressureScreen.dart';
 import 'User/BloodSugarScreen.dart';
 import 'User/HeartRateScreen.dart';
@@ -80,6 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
       final response = await get('https://aoide.tk/api/dashboard/user/$id');
       if (response.statusCode == 200) {
         data = json.decode(response.body);
+        User _user = userFromJson(response.body);
         print(data);
 
         await new Future.delayed(const Duration(milliseconds: 3), () async {
@@ -158,16 +162,59 @@ class _HomeScreenState extends State<HomeScreen> {
     return result;
   } //slideShow card
 
+  FlutterLocalNotificationsPlugin fltrNotification;
+  String _selectedParam;
+  String task;
+  int val;
   @override
   void initState() {
     super.initState();
     setup();
+    user2= setup();
     getCategories();
-    user2 = setup();
+    var androidInitilize = new AndroidInitializationSettings('app_icon');
+    var iOSinitilize = new IOSInitializationSettings();
+    var initilizationsSettings =
+        new InitializationSettings(androidInitilize, iOSinitilize);
+    fltrNotification = new FlutterLocalNotificationsPlugin();
+    fltrNotification.initialize(initilizationsSettings,
+        onSelectNotification: null);
+      _showNotification();  
+  }
+
+  Future notificationSelected(String payload) async {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        content: Text("Notification Clicked $payload"),
+      ),
+    );
+  }
+
+  Future _showNotification() async {
+    print('shownotif');
+    var androidDetails = new AndroidNotificationDetails(
+        "Channel ID", "Aoide", "Aoide Notification",
+        importance: Importance.Max);
+    var iSODetails = new IOSNotificationDetails();
+    var generalNotificationDetails =
+        new NotificationDetails(androidDetails, iSODetails);
+
+    // await fltrNotification.show(
+    //     0, "Title", "Notification body", generalNotificationDetails, payload: "Notification");
+  
   }
 
   @override
   Widget build(BuildContext context) {
+    _toNotification() {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => NotificationScreen(),
+          ));
+    }
+
     var cardList = [
       CustomCard(
         myIcon: Icon(CustomIcons.weight,
@@ -306,25 +353,40 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        MySpacer(height: 0.13),
+                        MySpacer(height: 0.11),
                         Padding(
-                          padding: const EdgeInsets.only(left: 40),
+                          padding: const EdgeInsets.only(left: 30),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
-                                  child: Text(
-                                (username != null)
-                                    ? "Hello, $username"
-                                    : "Hello,",
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                  fontFamily: 'Open-Sans-Regular',
-                                  letterSpacing: 2.0,
-                                  color: Colors.white,
-                                ),
-                              )),
+                                  padding: const EdgeInsets.only(right: 20),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        (username != null)
+                                            ? "Hello, $username"
+                                            : "Hello,",
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          fontSize: 16.0,
+                                          fontFamily: 'Open-Sans-Regular',
+                                          letterSpacing: 2.0,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      IconButton(
+                                        icon: Icon(
+                                          Icons.notifications,
+                                          color: Colors.white,
+                                          size: 30,
+                                        ),
+                                        onPressed: () => _toNotification(),
+                                      )
+                                    ],
+                                  )),
                               Container(
                                   child: Text(
                                 "Have a nice day!",

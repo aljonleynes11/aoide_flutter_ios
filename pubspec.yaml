@@ -49,6 +49,7 @@ dependencies:
   toast: ^0.1.5 #toast
   flutter_time_picker_spinner: ^1.0.6+1 #spinner
   flutter_speed_dial: ^1.2.5 #floatingButton
+  flutter_local_notifications: ^1.4.4+2     
 
 dev_dependencies: 
   flutter_test:

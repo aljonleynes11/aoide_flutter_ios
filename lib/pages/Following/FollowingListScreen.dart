@@ -1,18 +1,13 @@
 import 'dart:convert';
 import 'dart:math';
-
-import 'package:Aiode/commons/CustomIcons.dart';
-import 'package:Aiode/commons/MySpacer.dart';
 import 'package:Aiode/commons/TopNavBar.dart';
 import 'package:Aiode/helpers/size.dart';
-import 'package:Aiode/services/LogServices.dart';
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
+
 import 'package:http/http.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:toast/toast.dart';
+
+import '../Search/SearchProfile.dart';
 
 var json =
     '{"id": 1,"name": "username1","imageurl": "https://aoide.tk/uploads/avatars/avatar1.png"},{"id": 2,"name": "username2","imageurl": "https://aoide.tk/uploads/avatars/avatar2.png"}';
@@ -44,7 +39,7 @@ class _FollowingListScreenState extends State<FollowingListScreen> {
               child: ListView.builder(
                 itemCount: random(1, 5),
                 itemBuilder: (context, index) {
-                  var result = 'asdf';
+                  var result;
                   return Container(
                     color: Colors.white,
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -57,8 +52,9 @@ class _FollowingListScreenState extends State<FollowingListScreen> {
                     child: GestureDetector(
                       onTap: () async {
                         print(result);
-                        // await getDashboardDetails(
-                        //     int.parse(result['id'].toString()));
+                        await _toSearchProfile(
+                            // int.parse(result['id'].toString())
+                            167);
                       },
                       child: Row(children: [
                         Container(
@@ -118,6 +114,31 @@ class _FollowingListScreenState extends State<FollowingListScreen> {
           )),
     );
   }
+
+  var searched;
+  _toSearchProfile(int dataId) async {
+    try {
+      final response1 = await get('https://aoide.tk/api/dashboard/user/167');
+      if (response1.statusCode == 200) {
+        var myJson = jsonDecode(response1.body);
+        searched = myJson['data'];
+        if (searched.length > 0) {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SearchProfile(
+                  searchProfile: searched,
+                ),
+              ));
+          searchController.clear();
+        }
+        return searched;
+      }
+    } catch (e) {
+      print(e);
+    }
+    return searched;
+  }
 }
 
 random(min, max) {
@@ -137,6 +158,7 @@ var avatarList = [
   'https://aoide.tk/uploads/avatars/avatar9.png',
   'https://aoide.tk/uploads/avatars/avatar10.png',
 ];
+
 Widget renderImage(String image) {
   bool isHosted = false;
 
